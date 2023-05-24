@@ -61,7 +61,9 @@ void read_file(void);
 void populate(void);
 void check_command(void);
 void command_helper(char **cmd, int line);
+
 void push(int num);
 void pall(void);
+void pint(void);
 
 #endif

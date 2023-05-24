@@ -71,6 +71,8 @@ void command_helper(char **cmd, int line)
 		}
 		else if (strcmp(cmd[0], "pall") == 0)
 			pall();
+		else if (strcmp(cmd[0], "pint") == 0)
+			pint();
 		else
 		{
 			str = commands[line - 1];

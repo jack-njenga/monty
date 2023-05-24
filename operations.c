@@ -49,8 +49,8 @@ void pall(void)
 	temp = first;
 	if (temp == NULL)
 	{
-		fprintf(stderr, "stack underflow\n");
-		exit(EXIT_FAILURE);
+		/*fprintf(stderr, "stack underflow\n");*/
+		/*exit(EXIT_FAILURE);*/
 	}
 	else
 	{
@@ -64,4 +64,12 @@ void pall(void)
 			printf("%d\n", temp->n);
 		}
 	}
+}
+
+/**
+ */
+
+void pint(void)
+{
+	printf("%d\n", first->n);
 }
