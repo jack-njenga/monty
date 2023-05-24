@@ -1,7 +1,10 @@
 #include "monty.h"
 /**
+ * check_command - checks the commands and tokenizes it
+ *
+ * Return: void
  */
-void check_command()
+void check_command(void)
 {
 	int i = 0, n = 0;
 	char *_command[MIN_ARR];
@@ -16,7 +19,7 @@ void check_command()
 			_command[n] = strtok(commands[i], dell);
 			while (_command[n] != NULL)
 			{
-				//printf("[%d] :: %s \n", n, _command[n]);
+				/*printf("[%d] :: %s \n", n, _command[n]);*/
 				n++;
 				_command[n] = strtok(NULL, dell);
 			}
@@ -28,11 +31,17 @@ void check_command()
 }
 
 /**
+ * command_helper - checks for the command
+ * @cmd: the address of the command
+ * @line: line of the command
+ *
+ * Return: void
  */
 
 void command_helper(char **cmd, int line)
 {
 	int num;
+	char *str;
 
 	line = line + 1;
 	if (*cmd != NULL)
@@ -42,10 +51,7 @@ void command_helper(char **cmd, int line)
 			if (cmd[1] != NULL)
 			{
 				if (cmd[1][0] == '0')
-				{
-					//printf("push time\n");
 					push(0);
-				}
 				else
 				{
 					num = atoi(cmd[1]);
@@ -54,7 +60,6 @@ void command_helper(char **cmd, int line)
 						fprintf(stderr, "L%d: usage: push integer\n", line);
 						exit(EXIT_FAILURE);
 					}
-					//printf("push time 2\n");
 					push(num);
 				}
 			}
@@ -65,14 +70,12 @@ void command_helper(char **cmd, int line)
 			}
 		}
 		else if (strcmp(cmd[0], "pall") == 0)
-		{
-			//printf("pall time\n");
 			pall();
-		}
 		else
 		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", line, commands[line - 1]);
+			str = commands[line - 1];
+			fprintf(stderr, "L%d: unknown instruction %s\n", line, str);
 			exit(EXIT_FAILURE);
-		}	
+		}
 	}
 }

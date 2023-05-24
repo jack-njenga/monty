@@ -1,39 +1,48 @@
 #include "monty.h"
 /**
+ * push - pushes a number onto the stack
+ * @num: number to push
+ *
+ * Return: void
  */
 void push(int num)
 {
 	stack_t *new;
 
-	new = malloc(sizeof(stack_t));
-	if (!new)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-	new->n = num;
-	new->prev = NULL;
-	new->next = NULL;
-
 	if (first == NULL)
 	{
-		first = new;
+		first = malloc(sizeof(stack_t));
+		if (!first)
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			exit(EXIT_FAILURE);
+		}
+		first->n = num;
+		first->prev = NULL;
+		first->next = NULL;
 	}
 	else
 	{
-		while (first->next != NULL)
+		new = malloc(sizeof(stack_t));
+		if (!new)
 		{
-			first = first->next;
+			fprintf(stderr, "Error: malloc failed\n");
+			exit(EXIT_FAILURE);
 		}
-		first->next = new;
+		new->n = num;
 		new->prev = first;
+		new->next = NULL;
+		first->next = new;
 		first = new;
 	}
 }
 
 /**
+ * pall - prints everything in stack
+ *
+ * Return: void
  */
-void pall()
+void pall(void)
 {
 	stack_t *temp;
 
@@ -49,6 +58,10 @@ void pall()
 		{
 			printf("%d\n", temp->n);
 			temp = temp->prev;
+		}
+		if (temp->prev == NULL)
+		{
+			printf("%d\n", temp->n);
 		}
 	}
 }

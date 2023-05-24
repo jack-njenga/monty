@@ -5,7 +5,7 @@
  * Return: void
  */
 
-void _default()
+void _default(void)
 {
 	fprintf(stderr, "USAGE: monty file\n");
 	exit(EXIT_FAILURE);

@@ -5,7 +5,7 @@
  * Return: void
  */
 
-void check_file()
+void check_file(void)
 {
 	struct stat path_info;
 

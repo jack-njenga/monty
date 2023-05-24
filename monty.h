@@ -55,13 +55,13 @@ typedef struct instruction_s
 } instruction_t;
 
 /* prototypes */
-void _default();
-void check_file();
-void read_file();
-void populate();
-void check_command();
+void _default(void);
+void check_file(void);
+void read_file(void);
+void populate(void);
+void check_command(void);
 void command_helper(char **cmd, int line);
 void push(int num);
-void pall();
+void pall(void);
 
 #endif
