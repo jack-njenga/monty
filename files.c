@@ -28,7 +28,7 @@ void check_file(void)
  */
 void read_file(void)
 {
-	int nread, i, line = 0;
+	int nread, line = 0;
 	size_t len = 0;
 	const char *file;
 	char *cmd = NULL, *token;
@@ -39,13 +39,12 @@ void read_file(void)
 	if (fd == NULL)
 		error_file();
 
-	while (nread = getline(&cmd, &len, fd) != -1)
+	while ((nread = getline(&cmd, &len, fd) != -1))
 	{
 		line++;
 		token = strtok(cmd, "\t\n");
 		if (!token)
 			continue;
-		printf("L%d: %s\n", line, token);
 		populate(token, line);
 	}
 	if (nread == -1)
@@ -55,6 +54,8 @@ void read_file(void)
 }
 /**
  * populate - populate the commands
+ * @token: contains the commands and args
+ * @line: line of the command
  */
 void populate(char *token, int line)
 {
@@ -65,7 +66,8 @@ void populate(char *token, int line)
 	while (str != NULL)
 	{
 		cmd[i] = str;
-		str = strtok(NULL, " ");	
+		i++;
+		str = strtok(NULL, " ");
 	}
 	cmd[i] = '\0';
 	if (cmd[0] != NULL)

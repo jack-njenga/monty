@@ -15,25 +15,6 @@
 #define MIN_ARR 8
 
 /* structures */
-
-/**
- * struct global_s - global variables
- * @filename: filename
- * @content: content
- * @commands: commands
- * @buff: buffer
- *
- * Description: global variables
- */
-typedef struct global_s
-{
-	const char *filename;
-	char content[BUFFER_SIZE];
-	char *commands[MAX_ARR];
-	char *buff[MAX_ARR];
-	char *cmd[MIN_ARR];
-} global_t;
-
 /**
  * struct stack_s - doubly linked list representation of
  * a stack (or queue)
@@ -65,6 +46,25 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct global_s - global variables
+ * @filename: filename
+ * @content: content
+ * @commands: commands
+ * @buff: buffer
+ * @the_first: the first element in the stack
+ *
+ * Description: global variables
+ */
+typedef struct global_s
+{
+	const char *filename;
+	char content[BUFFER_SIZE];
+	char *commands[MAX_ARR];
+	char *buff[MAX_ARR];
+	stack_t *the_first;
+} global_t;
+
 /* prototypes */
 
 /*files*/
@@ -76,7 +76,9 @@ void populate(char *token, int line);
 void command_checker(char **cmd, int line);
 
 /*operations*/
-
+void push(int num);
+void pall(void);
+void pint(void);
 
 /*defaults */
 void _default(void);
@@ -84,6 +86,7 @@ void error_file(void);
 void error_read(void);
 void error_push(int line);
 void error_command(int line, char *str);
+void error_malloc(void);
 
 global_t global;
 stack_t *first;

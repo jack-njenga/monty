@@ -13,22 +13,17 @@ void push(int num)
 	{
 		first = malloc(sizeof(stack_t));
 		if (!first)
-		{
-			fprintf(stderr, "Error: malloc failed\n");
-			exit(EXIT_FAILURE);
-		}
+			error_malloc();
 		first->n = num;
 		first->prev = NULL;
 		first->next = NULL;
+		global.the_first = first;
 	}
 	else
 	{
 		new = malloc(sizeof(stack_t));
 		if (!new)
-		{
-			fprintf(stderr, "Error: malloc failed\n");
-			exit(EXIT_FAILURE);
-		}
+			error_malloc();
 		new->n = num;
 		new->prev = first;
 		new->next = NULL;
@@ -46,23 +41,13 @@ void pall(void)
 {
 	stack_t *temp;
 
-	temp = first;
+	temp = global.the_first;
 	if (temp == NULL)
+		return;
+	while (temp != NULL)
 	{
-		/*fprintf(stderr, "stack underflow\n");*/
-		/*exit(EXIT_FAILURE);*/
-	}
-	else
-	{
-		while (temp->prev != NULL)
-		{
-			printf("%d\n", temp->n);
-			temp = temp->prev;
-		}
-		if (temp->prev == NULL)
-		{
-			printf("%d\n", temp->n);
-		}
+		printf("%d\n", temp->n);
+		temp = temp->next;
 	}
 }
 

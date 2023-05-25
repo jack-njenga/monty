@@ -35,7 +35,7 @@ void error_push(int line)
 }
 /**
  * error_command - wrong command error
- * @line line of error
+ * @line: line of error
  * @str: wrong command
  */
 void error_command(int line, char *str)

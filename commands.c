@@ -7,7 +7,6 @@
 void command_checker(char **cmd, int line)
 {
 	int num;
-	char *str, **commands;
 
 	if (*cmd != NULL)
 	{
