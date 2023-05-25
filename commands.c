@@ -30,7 +30,7 @@ void command_checker(char **cmd, int line)
 		else if (strcmp(cmd[0], "pall") == 0)
 			pall();
 		else if (strcmp(cmd[0], "pint") == 0)
-			pint();
+			pint(line);
 		else
 			error_command(line, cmd[0]);
 	}

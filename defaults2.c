@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 /**
  * error_malloc - error for malloc
  */

@@ -78,7 +78,7 @@ void command_checker(char **cmd, int line);
 /*operations*/
 void push(int num);
 void pall(void);
-void pint(void);
+void pint(int line);
 
 /*defaults */
 void _default(void);

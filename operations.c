@@ -53,9 +53,18 @@ void pall(void)
 
 /**
  * pint - prints the top most element of the stack
+ * @line: line number
  */
 
-void pint(void)
+void pint(int line)
 {
+	stack_t *temp;
+
+	temp = first;
+	if (temp == NULL || temp->prev == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line);
+		exit(EXIT_FAILURE);
+	}
 	printf("%d\n", first->n);
 }
