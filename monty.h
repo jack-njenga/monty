@@ -79,6 +79,19 @@ void command_checker(char **cmd, int line);
 void push(int num);
 void pall(void);
 void pint(int line);
+void pop(int line);
+void swap(int line);
+
+/*operations_2*/
+void add(int line);
+void mod(int line);
+void sub(int line);
+void _div(int line);
+void mul(int line);
+
+
+/* stack_checks*/
+int len_stack(void);
 
 /*defaults */
 void _default(void);

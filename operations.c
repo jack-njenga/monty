@@ -9,25 +9,25 @@ void push(int num)
 {
 	stack_t *new;
 
-	if (first == NULL)
-	{
-		first = malloc(sizeof(stack_t));
-		if (!first)
-			error_malloc();
-		first->n = num;
-		first->prev = NULL;
-		first->next = NULL;
-		global.the_first = first;
-	}
+	new = malloc(sizeof(stack_t));
+	if (!new)
+		error_malloc();
 	else
 	{
-		new = malloc(sizeof(stack_t));
-		if (!new)
-			error_malloc();
 		new->n = num;
-		new->prev = first;
+		new->prev = NULL;
 		new->next = NULL;
+	}
+	if (first == NULL)
+		first = new;
+	else
+	{
+		while (first->next != NULL)
+		{
+			first = first->next;
+		}
 		first->next = new;
+		new->prev = first;
 		first = new;
 	}
 }
@@ -39,16 +39,16 @@ void push(int num)
  */
 void pall(void)
 {
-	stack_t *temp;
+	stack_t *temp = first;
 
-	temp = global.the_first;
-	if (temp == NULL)
-		return;
-	while (temp != NULL)
+	while (temp->next != NULL)
+		temp = temp->next;
+	while (temp->prev != NULL)
 	{
 		printf("%d\n", temp->n);
-		temp = temp->next;
+		temp = temp->prev;
 	}
+	printf("%d\n", temp->n);
 }
 
 /**
@@ -58,13 +58,57 @@ void pall(void)
 
 void pint(int line)
 {
-	stack_t *temp;
-
-	temp = first;
-	if (temp == NULL || temp->prev == NULL)
+	if (first == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line);
 		exit(EXIT_FAILURE);
 	}
+	while (first->next != NULL)
+		first = first->next;
 	printf("%d\n", first->n);
+}
+/**
+ * pop - pops out the top most element
+ * @line: line number
+ */
+void pop(int line)
+{
+	stack_t *temp;
+
+	if (first == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line);
+		exit(EXIT_FAILURE);
+	}
+	if (first->prev == NULL)
+	{
+		free(first);
+		first = NULL;
+		exit(0);
+	}
+	temp = first->prev;
+	temp->next = NULL;
+	free(first);
+	first = temp;
+}
+/**
+ * swap - swaps the top 2 elements
+ * @line: line of the commnad
+ */
+void swap(int line)
+{
+stack_t *head = first, *next = NULL;
+	int len = len_stack();
+
+	if (len < 2)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line);
+		exit(EXIT_FAILURE);
+	}
+	next = first->next;
+	head->prev = next;
+	head->next = next->next;
+	next->next = head;
+	next->prev = NULL;
+	first = next;
 }

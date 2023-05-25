@@ -1,4 +1,5 @@
 #include "monty.h"
+void command_helper(char **cmd, int line);
 /**
  * command_checker - checks the commands
  * @cmd: commands
@@ -31,7 +32,33 @@ void command_checker(char **cmd, int line)
 			pall();
 		else if (strcmp(cmd[0], "pint") == 0)
 			pint(line);
+		else if (strcmp(cmd[0], "pop") == 0)
+			pop(line);
+		else if (strcmp(cmd[0], "swap") == 0)
+			swap(line);
+		else if (strcmp(cmd[0], "add") == 0)
+			add(line);
+		else if (strcmp(cmd[0], "nop") == 0)
+			(void)line;
 		else
-			error_command(line, cmd[0]);
+			command_helper(cmd, line);
 	}
+}
+/**
+ * command_helper - command helper
+ * @cmd: ccommand
+ * @line: line of the command
+ */
+void command_helper(char **cmd, int line)
+{
+	if (strcmp(cmd[0], "sub") == 0)
+		sub(line);
+	else if (strcmp(cmd[0], "div") == 0)
+		_div(line);
+	else if (strcmp(cmd[0], "mul") == 0)
+		mul(line);
+	else if (strcmp(cmd[0], "mod") == 0)
+		mod(line);
+	else
+		error_command(line, cmd[0]);
 }
