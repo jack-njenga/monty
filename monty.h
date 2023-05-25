@@ -32,7 +32,6 @@ typedef struct global_s
 	char *commands[MAX_ARR];
 	char *buff[MAX_ARR];
 	char *cmd[MIN_ARR];
-	char *arr[MIN_ARR];
 } global_t;
 
 /**
@@ -65,6 +64,26 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/* prototypes */
+
+/*files*/
+void read_file(void);
+void check_file(void);
+void populate(char *token, int line);
+
+/*commands*/
+void command_checker(char **cmd, int line);
+
+/*operations*/
+
+
+/*defaults */
+void _default(void);
+void error_file(void);
+void error_read(void);
+void error_push(int line);
+void error_command(int line, char *str);
 
 global_t global;
 stack_t *first;
