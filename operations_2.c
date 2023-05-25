@@ -5,7 +5,7 @@
  */
 void add(int line)
 {
-	stack_t *head = first, *next = NULL;
+	stack_t *head = first;
 	int sum, len = len_stack();
 
 	if (len < 2)
@@ -13,11 +13,9 @@ void add(int line)
 		fprintf(stderr, "L%d: can't add, stack too short\n", line);
 		exit(EXIT_FAILURE);
 	}
-	next = head->next;
-	sum = ((first->n) + ((first->next)->n));
-	next->n = sum;
-	first = next;
-	free(head);
+	sum = (head->n) + ((head->prev)->n);
+	(head->prev)->n = sum;
+	pop(line);
 }
 /**
  * mod - nothing else to do
@@ -39,11 +37,9 @@ void mod(int line)
 		fprintf(stderr, "L%d: division by zero\n", line);
 		exit(EXIT_FAILURE);
 	}
-	rem = (temp->next->n) % (temp->n);
-	temp->next->n = rem;
-	temp->next->prev = NULL;
-	first = temp->next;
-	free(temp);
+	rem = ((temp->prev)->n % temp->n);
+	(temp->prev)->n = rem;
+	pop(line);
 }
 /**
  * sub - subtracts the top 2 elements
@@ -60,11 +56,9 @@ void sub(int line)
 		fprintf(stderr, "L%d: can't sub, stack too short\n", line);
 		exit(EXIT_FAILURE);
 	}
-	diff = (temp->next->n) - (temp->n);
-	temp->next->n = diff;
-	temp->next->prev = NULL;
-	first = temp->next;
-	free(temp);
+	diff = (((temp->prev)->n) - (temp->n));
+	(temp->prev)->n = diff;
+	pop(line);
 }
 /**
  * _div - divides the top 2 elements
@@ -72,7 +66,7 @@ void sub(int line)
  */
 void _div(int line)
 {
-	int m = 0;
+	int ans = 0;
 	stack_t *temp = first;
 	int len = len_stack();
 
@@ -86,11 +80,9 @@ void _div(int line)
 		fprintf(stderr, "L%d: division by zero\n", line);
 		exit(EXIT_FAILURE);
 	}
-	m = (temp->next->n) / (temp->n);
-	temp->next->n = m;
-	temp->next->prev = NULL;
-	first = temp->next;
-	free(temp);
+	ans = ((temp->prev)->n / temp->n);
+	(temp->prev)->n = ans;
+	pop(line);
 }
 /**
  * mul - multiplies the top 2 elements
@@ -107,9 +99,7 @@ void mul(int line)
 		fprintf(stderr, "L%d: can't mul, stack too short", line);
 		exit(EXIT_FAILURE);
 	}
-	ans = (temp->n) * (temp->next->n);
-	temp->next->n = ans;
-	temp->next->prev = NULL;
-	first = temp->next;
-	free(temp);
+	ans = (((temp->prev)->n) * (temp->n));
+	(temp->prev)->n = ans;
+	pop(line);
 }

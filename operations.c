@@ -97,18 +97,19 @@ void pop(int line)
  */
 void swap(int line)
 {
-stack_t *head = first, *next = NULL;
+	stack_t *head = first, *next = NULL;
 	int len = len_stack();
 
+	printf("%d\n", len);
 	if (len < 2)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line);
 		exit(EXIT_FAILURE);
 	}
-	next = first->next;
-	head->prev = next;
-	head->next = next->next;
-	next->next = head;
-	next->prev = NULL;
+	next = head->prev;
+	head->prev = next->prev;
+	head->next = next;
+	next->next = NULL;
+	next->prev = head;
 	first = next;
 }

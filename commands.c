@@ -11,6 +11,8 @@ void command_checker(char **cmd, int line)
 
 	if (*cmd != NULL)
 	{
+		if (cmd[0][0] == '#' || strcmp(cmd[0], "#") == 0)
+			(void)line;
 		if (strcmp(cmd[0], "push") == 0)
 		{
 			if (cmd[1] != NULL)

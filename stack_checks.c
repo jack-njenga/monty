@@ -9,10 +9,11 @@ int len_stack(void)
 	size_t i = 0;
 	stack_t *top = first;
 
-	while (top != NULL)
+	while (top->prev != NULL)
 	{
 		i++;
-		top = top->next;
+		top = top->prev;
 	}
+	i++;
 	return (i);
 }
